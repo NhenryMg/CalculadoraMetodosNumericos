@@ -187,26 +187,6 @@ Si encuentras errores o tienes sugerencias de mejora, puedes abrir un **Issue** 
 | NhenryMg | Desarrollador Principal |
 | MiguelAngel861 | Desarrollador Principal |
 
-### Agradecimientos
-
-- A la comunidad de Java por su documentación y soporte.
-- A todos los usuarios y colaboradores que han ayudado a mejorar esta herramienta.
-- A quienes utilizan este proyecto para aprender y fortalecer sus conocimientos en métodos numéricos.
-
----
-
-## 📄 Licencia
-
-Este proyecto se distribuye bajo la **Licencia MIT**.
-
-Consulta el archivo:
-
-```text
-LICENSE
-```
-
-para más información.
-
 ---
 
 ## 📞 Contacto
@@ -214,18 +194,7 @@ para más información.
 ### GitHub
 
 **MiguelAngel861**
-
----
-
-## 🌟 Mensaje Final
-
-¡Gracias por utilizar la **Calculadora de Métodos Numéricos**!
-
-Esperamos que esta herramienta sea de gran utilidad para tus estudios, proyectos académicos y aprendizaje de métodos numéricos.
-
-Si te resultó útil, considera darle una ⭐ al repositorio.
-
-**Última actualización:** Junio 2026
+**NhenryMg**
 
 ---
 
@@ -262,48 +231,3 @@ java CalculadoraGUI
 
 ---
 
-## 🧮 Funciones Matemáticas Soportadas
-
-Para los métodos que utilizan funciones matemáticas:
-
-### Potencias
-
-```java
-x*x - 4
-```
-
-### Seno
-
-```java
-Math.sin(x)
-```
-
-### Coseno
-
-```java
-Math.cos(x)
-```
-
-### Exponencial
-
-```java
-Math.exp(x)
-```
-
-### Logaritmo Natural
-
-```java
-Math.log(x)
-```
-
-### Raíz Cuadrada
-
-```java
-Math.sqrt(x)
-```
-
----
-
-## 🎉 ¡Disfruta Calculando!
-
-Desarrollado con ❤️ en Java para facilitar el aprendizaje y aplicación de los métodos numéricos.
