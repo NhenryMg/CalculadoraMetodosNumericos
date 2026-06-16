@@ -184,6 +184,7 @@ Si encuentras errores o tienes sugerencias de mejora, puedes abrir un **Issue** 
 
 | Desarrollador | Rol |
 |--------------|-----|
+| NhenryMg | Desarrollador Principal |
 | MiguelAngel861 | Desarrollador Principal |
 
 ### Agradecimientos
