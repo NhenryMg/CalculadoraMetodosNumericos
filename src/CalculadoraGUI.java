@@ -93,7 +93,7 @@ public class CalculadoraGUI extends JFrame {
         panel.setBackground(new Color(52, 73, 94));
         panel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
         
-        JLabel label = new JLabel("📐 Selecciona método:");
+        JLabel label = new JLabel("Selecciona método:");
         label.setForeground(Color.WHITE);
         label.setFont(new Font("Arial", Font.BOLD, 14));
         panel.add(label);
@@ -121,7 +121,7 @@ public class CalculadoraGUI extends JFrame {
         JPanel panel = new JPanel(new BorderLayout());
         panel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
         
-        JLabel titulo = new JLabel("📝 Parámetros");
+        JLabel titulo = new JLabel("Parámetros");
         titulo.setFont(new Font("Arial", Font.BOLD, 16));
         titulo.setBorder(BorderFactory.createEmptyBorder(0, 0, 10, 0));
         panel.add(titulo, BorderLayout.NORTH);
@@ -203,7 +203,7 @@ public class CalculadoraGUI extends JFrame {
         panel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
         
         // Botón Calcular
-        JButton btnCalcular = new JButton("🔢 Calcular");
+        JButton btnCalcular = new JButton("Calcular");
         btnCalcular.setFont(new Font("Arial", Font.BOLD, 14));
         btnCalcular.setBackground(new Color(46, 204, 113));
         btnCalcular.setForeground(Color.WHITE);
@@ -214,7 +214,7 @@ public class CalculadoraGUI extends JFrame {
         panel.add(btnCalcular);
         
         // Botón Limpiar
-        JButton btnLimpiar = new JButton("🗑️ Limpiar");
+        JButton btnLimpiar = new JButton("Limpiar");
         btnLimpiar.setFont(new Font("Arial", Font.BOLD, 14));
         btnLimpiar.setBackground(new Color(231, 76, 60));
         btnLimpiar.setForeground(Color.WHITE);
@@ -225,7 +225,7 @@ public class CalculadoraGUI extends JFrame {
         panel.add(btnLimpiar);
         
         // Botón Exportar
-        JButton btnExportar = new JButton("📤 Exportar");
+        JButton btnExportar = new JButton("Exportar");
         btnExportar.setFont(new Font("Arial", Font.BOLD, 14));
         btnExportar.setBackground(new Color(52, 152, 219));
         btnExportar.setForeground(Color.WHITE);
