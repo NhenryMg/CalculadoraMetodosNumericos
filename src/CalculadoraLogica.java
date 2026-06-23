@@ -73,31 +73,106 @@ public class CalculadoraLogica {
     // --- Raíces ---
 
     public double biseccion(Function<Double, Double> f, double a, double b, double tol) {
-        double c = a;
-        while ((b - a) / 2.0 > tol) {
-            c = (a + b) / 2.0;
-            if (f.apply(c) == 0.0) break;
-            if (f.apply(a) * f.apply(c) < 0) b = c;
-            else a = c;
+        if (f.apply(a) * f.apply(b) > 0) {
+            throw new IllegalArgumentException("La función debe tener signos opuestos en los extremos del intervalo [a, b] (f(a) * f(b) <= 0)");
         }
+        
+        StringBuilder sb = new StringBuilder("Procedimiento Bisección:\n");
+        sb.append(String.format("%-4s | %-12s | %-12s | %-12s | %-12s | %-12s\n", "Iter", "a", "b", "c", "f(c)", "Error"));
+        sb.append("-------------------------------------------------------------------------------------\n");
+        
+        double c = a;
+        int iter = 0;
+        int maxIter = 1000;
+        
+        while ((b - a) / 2.0 > tol && iter < maxIter) {
+            c = (a + b) / 2.0;
+            double fa = f.apply(a);
+            double fc = f.apply(c);
+            double error = (b - a) / 2.0;
+            
+            sb.append(String.format("%-4d | %-12.8f | %-12.8f | %-12.8f | %-12.8f | %-12.8f\n", iter, a, b, c, fc, error));
+            
+            if (fc == 0.0) {
+                break;
+            }
+            if (fa * fc < 0) {
+                b = c;
+            } else {
+                a = c;
+            }
+            iter++;
+        }
+        
+        c = (a + b) / 2.0;
+        sb.append("\nResultado final: x = ").append(c);
+        ultimoProcedimiento = sb.toString();
         return c;
     }
 
     public double newtonRaphson(Function<Double, Double> f, Function<Double, Double> df, double x0, double tol) {
         double x = x0;
-        while (Math.abs(f.apply(x)) > tol) {
-            x = x - f.apply(x) / df.apply(x);
+        int maxIter = 1000;
+        int iter = 0;
+        
+        StringBuilder sb = new StringBuilder("Procedimiento Newton-Raphson:\n");
+        sb.append(String.format("%-4s | %-12s | %-12s | %-12s | %-12s | %-12s\n", "Iter", "x_i", "f(x_i)", "f'(x_i)", "x_{i+1}", "Error"));
+        sb.append("-------------------------------------------------------------------------------------\n");
+        
+        while (iter < maxIter) {
+            double fx = f.apply(x);
+            double dfx = df.apply(x);
+            
+            if (Math.abs(dfx) < 1e-12) {
+                throw new ArithmeticException("Derivada cero en x = " + x);
+            }
+            
+            double xNext = x - fx / dfx;
+            double error = Math.abs(xNext - x);
+            
+            sb.append(String.format("%-4d | %-12.8f | %-12.8f | %-12.8f | %-12.8f | %-12.8f\n", iter, x, fx, dfx, xNext, error));
+            
+            if (error < tol) {
+                sb.append("\nResultado final: x = ").append(xNext);
+                ultimoProcedimiento = sb.toString();
+                return xNext;
+            }
+            
+            x = xNext;
+            iter++;
         }
-        return x;
+        
+        throw new RuntimeException("No convergió después de " + maxIter + " iteraciones");
     }
 
     public double secante(Function<Double, Double> f, double x0, double x1, double tol) {
-        double x2;
-        while (Math.abs(x1 - x0) > tol) {
-            x2 = x1 - f.apply(x1) * (x1 - x0) / (f.apply(x1) - f.apply(x0));
+        StringBuilder sb = new StringBuilder("Procedimiento Secante:\n");
+        sb.append(String.format("%-4s | %-12s | %-12s | %-12s | %-12s\n", "Iter", "x0", "x1", "x2", "Error"));
+        sb.append("-------------------------------------------------------------------------\n");
+        
+        double x2 = x1;
+        int iter = 0;
+        int maxIter = 1000;
+        
+        while (Math.abs(x1 - x0) > tol && iter < maxIter) {
+            double fx0 = f.apply(x0);
+            double fx1 = f.apply(x1);
+            
+            if (Math.abs(fx1 - fx0) < 1e-12) {
+                throw new ArithmeticException("División por cero en el método de la Secante (f(x1) - f(x0) aprox. 0)");
+            }
+            
+            x2 = x1 - fx1 * (x1 - x0) / (fx1 - fx0);
+            double error = Math.abs(x1 - x0);
+            sb.append(String.format("%-4d | %-12.8f | %-12.8f | %-12.8f | %-12.8f\n", iter, x0, x1, x2, error));
+            
             x0 = x1;
             x1 = x2;
+            iter++;
         }
+        
+        sb.append("\nResultado final: x = ").append(x1);
+        ultimoProcedimiento = sb.toString();
         return x1;
     }
 

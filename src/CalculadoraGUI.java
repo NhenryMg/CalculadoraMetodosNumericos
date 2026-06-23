@@ -466,71 +466,11 @@ public class CalculadoraGUI extends JFrame {
     private java.util.function.Function<Double, Double> crearFuncion(String expresion) {
         return (x) -> {
             try {
-                // Reemplazar x con el valor numérico
-                String expr = expresion.replaceAll("x", "(" + x + ")");
-                
-                // Evaluar usando ScriptEngineManager con manejo de errores
-                ScriptEngineManager manager = new ScriptEngineManager();
-                ScriptEngine engine = manager.getEngineByName("JavaScript");
-                
-                if (engine == null) {
-                    // Si no hay motor JavaScript, usar evaluación manual para funciones básicas
-                    return evaluarManual(expresion, x);
-                }
-                
-                return ((Number) engine.eval(expr)).doubleValue();
-            } catch (ScriptException e) {
-                // Si falla, intentar evaluación manual
-                return evaluarManual(expresion, x);
+                return new ExpressionParser(expresion).parse(x);
             } catch (Exception e) {
                 throw new RuntimeException("Error evaluando función: " + e.getMessage());
             }
         };
-    }
-
-    // Método alternativo para evaluar funciones sin JavaScript
-    private double evaluarManual(String expresion, double x) {
-        String expr = expresion.replaceAll("x", "(" + x + ")");
-        
-        // Manejar operaciones básicas
-        try {
-            // Usar JavaScript si está disponible, sino calcular manualmente
-            ScriptEngineManager manager = new ScriptEngineManager();
-            ScriptEngine engine = manager.getEngineByName("JavaScript");
-            if (engine != null) {
-                try {
-                    return ((Number) engine.eval(expr)).doubleValue();
-                } catch (ScriptException e) {
-                    // Fallback a cálculo manual
-                }
-            }
-            
-            // Evaluación manual para funciones comunes
-            expr = expr.replace("Math.sin", "sin");
-            expr = expr.replace("Math.cos", "cos");
-            expr = expr.replace("Math.tan", "tan");
-            expr = expr.replace("Math.exp", "exp");
-            expr = expr.replace("Math.log", "log");
-            expr = expr.replace("Math.sqrt", "sqrt");
-            expr = expr.replace("Math.pow", "pow");
-            expr = expr.replace("Math.PI", "" + Math.PI);
-            expr = expr.replace("Math.E", "" + Math.E);
-            
-            // Evaluar con JavaScript mejorado
-            if (engine != null) {
-                try {
-                    return ((Number) engine.eval(expr)).doubleValue();
-                } catch (ScriptException e) {
-                    // Si todo falla, retornar un valor por defecto
-                    System.err.println("Error evaluando: " + expresion);
-                    return Double.NaN;
-                }
-            }
-            
-            return Double.NaN;
-        } catch (Exception e) {
-            throw new RuntimeException("Error evaluando función: " + e.getMessage());
-        }
     }
     
     private void limpiarCampos() {
